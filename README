@@ -1,0 +1,34 @@
+Commands used:
+1. Get to right folder
+    * `cd ~/Investigation/NextflowNonDefault/NFDefault`
+
+2. Purge files between tests
+    * `rm -rf work/ && rm -rf ~/.nextflow/assets/gwright99`
+    * `docker image ls | grep bash`
+    * `docker image rm quay.io/nextflow/bash:latest`
+
+3. Production branch container always defined in `nextflow.config`:
+    * `process.container = 'quay.io/nextflow/bash'`
+
+4. Production branch `main.nf` always: 
+```
+#!/usr/bin/env nextflow
+
+cheers = Channel.from 'Bonjour', 'Ciao', 'Hello', 'Hola'
+
+process sayHello {
+  echo true
+  input: 
+    val x from cheers
+  script:
+    """
+    echo '$x world!'
+    """
+}
+```
+
+Branches in play:
+* default
+* production
+
+
